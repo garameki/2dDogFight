@@ -1,0 +1,52 @@
+<!DOCTYPE html><html><head>
+<script type='text/javascript'>
+
+
+var A = function(){
+
+};
+A.prototype.print = function(){
+	console.log("A=",A);
+};
+
+
+var B = A;
+B.prototype.write = function(){
+	console.log("B=",B);
+};
+var C=A;
+C.prototype.draw = function(){
+	console.log("C=",C);
+};
+
+
+
+b = new B;
+c= new C
+
+
+b.print();
+c.print();
+c.write();
+
+
+
+
+
+</script>
+</head><body><div></div></body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

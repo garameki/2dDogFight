@@ -1,0 +1,52 @@
+
+
+//Fri Jan 12 2018 17:36:24 GMT+0900 (東京 (標準時))
+
+
+Headers +='headerPlaneMANUAL1_0();\n';//こいつをaction.htmでeval()
+
+var headerPlaneMANUAL1_0 = function(){
+
+	const folda = '../Plane/MANUAL/parts/'
+
+	var names=new Array();
+	names.push('motion_0.js');
+	names.push('../../MATH/parts/collision0_1.js');
+	names.push('ssPlaneMANUAL1_0.js');
+
+
+	
+	//headerのidを取得
+	var headId=document.getElementsByTagName("head")[0];
+	var tagNew;
+	for(var ii=0;ii<names.length;ii++){
+		tagNew = document.createElement("script");
+		tagNew.setAttribute("type","text/javascript");
+		tagNew.setAttribute("src",folda+names[ii]);
+		tagNew.setAttribute("charset","Shift_JIS");
+		headId.appendChild(tagNew);
+	};
+
+	//ここでplaneの機能拡張 proc*はPlaneAIVer0の中でプロシージャとして使われます。
+	var counter=0;
+	var hoge = setInterval(function(){
+		counter++;
+		if(counter>20 || flagStop){
+			console.error("PlaneMANUAL1_0 is not defined !");
+			clearInterval(hoge);
+			flagStop=true;
+		};
+		if('PlaneMANUAL1_0' in window){
+			//use this name above as class name in casting file
+			PlaneMANUAL1_0.prototype.procMotion=PlaneMANUALMotionVer0;//各ファイルの中の関数名を使います
+			PlaneMANUAL1_0.prototype.procCollision=PlaneMATHCollision0_1;//拝借
+//MATHから拝借中	PlaneMANUAL1_0.prototype.procCollision=PlaneMANUALCollision;
+			clearInterval(hoge);
+			console.info("PlaneMANUAL1_0 が使えます !");
+		};
+	},100);
+};
+
+
+
+

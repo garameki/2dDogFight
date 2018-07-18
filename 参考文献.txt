@@ -1,0 +1,42 @@
+WebLabyrinth
+https://weblabyrinth.net/javascript-for-flash-alternative-think-preloaded-audio-files/
+しらぎくさいと
+https://www.marguerite.jp/Nihongo/WWW/RefHTML/Attrs/EventHandlers/oncanplaythrough.html
+JSすぐに使えるサンプル集
+http://www.shurey.com/js/samples/1_tips10.html
+Tatsuo Ikura
+https://www.ajaxtower.jp/js/if/index4.html
+パズルネット「ソフィア」
+http://www.pori2.net/js/number/6.html
+MSDN OpenTextFIle メソッド
+https://msdn.microsoft.com/ja-jp/library/cc428044.aspx
+パズルネット「ソフィア」
+http://www.pori2.net/js/number/1.html
+MSDN Math.floor()
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Math/floor
+HTML5.jp
+http://www.html5.jp/canvas/ref/method/fillRect.html
+Syncer
+https://lab.syncer.jp/Web/JavaScript/Snippet/7/
+Private Tips
+http://zvub.hateblo.jp/entry/2015/01/08/160130
+stack overflow
+https://stackoverflow.com/questions/22825326/difference-between-settimeout-and-setinterval
+syncer
+https://lab.syncer.jp/Web/JavaScript/Snippet/7/
+syncer
+https://lab.syncer.jp/Web/JavaScript/Snippet/4/
+Wikipedia
+https://ja.wikipedia.org/wiki/%E6%9C%80%E6%80%A5%E9%99%8D%E4%B8%8B%E6%B3%95
+HTML5.jp
+http://www.html5.jp/canvas/how2.html
+HTML5.jp
+http://www.html5.jp/canvas/ref/property/globalCompositeOperation.html
+
+
+
+
+
+
+
+

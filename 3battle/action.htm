@@ -1,0 +1,126 @@
+<html>
+<head>
+
+
+<script type="text/javascript">
+<!--
+//グローバル変数
+
+
+flagStop=false;//ここでの指定は必須
+Headers="";//ここでの指定は必須
+$test=false;//ここではtrueにしない。
+var ww5;
+
+
+
+
+onload = function () {
+
+	flagExploreSpriteF=false;//試験用→SpriteF.explore()参照
+//	flagExploreSpriteF=true;//試験用→SpriteF.explore()参照
+
+	//ww5と関連付けするように！！
+
+	globalVariables();
+
+
+	eval(Headers);//headerAI5_0,headerPlaneAI5_0,headerPlaneMANUAL1_0がいまのところ使用可能
+
+
+
+//	headerPlaneMATH0_4();
+	
+
+	LayerScenery();
+	var count=0;
+	var hogeInit = setInterval(function(){
+		if('Weight30' in window){
+			clearInterval(hogeInit);
+
+			initialize();
+			initializeEventListner();
+		}else{
+			count++
+			if(count>30){
+				clearInterval(hogeInit);
+				flagStop=true;
+				console.log("action.js     initialize();が実行できませんでした。");
+			};
+		};
+	},100);
+};
+-->
+</script>
+<script type="text/javascript" src="../globalVariables_2.js"></script>
+<script type="text/javascript" src="../../library/angleOppositeToXAxis.js"></script>
+<script type="text/javascript" src="../../library/XYAfterRotation.js"></script>
+<script type="text/javascript" src="../eventListners.js"></script>
+<script type="text/javascript" src="../Sprite.js"></script>
+
+<!--Headers-->
+<script type="text/javascript" src="../Brain/AI/Ver5/headAI5_2.js"></script>
+<script type="text/javascript" src="../Brain/AI/Ver5/headAI5_2_1.js"></script>
+<script type="text/javascript" src="../Plane/AI/headPlaneAI5_1.js"></script>
+<script type="text/javascript" src="../Plane/AI/headPlaneAI5_1_1.js"></script>
+<script type="text/javascript" src="../Plane/MANUAL/headPlaneMANUAL1_0.js"></script>
+
+<!--Functions-->
+<script type="text/javascript" src="../Beam/AI/ssBeamAI2_0.js"></script>
+<script type="text/javascript" src="../Beam/MANUAL/ssBeamMANUAL1_0.js"></script>
+
+
+<script type="text/javascript" src="../ssHorizon.js"></script>
+<script type="text/javascript" src="../ssScene.js"></script>
+<script type="text/javascript" src="../ssArrow.js"></script>
+
+
+<script type="text/javascript" src="./stage.js"></script>
+<script type="text/javascript" src="./casting.js"></script>
+</head>
+<body style="overflow:hidden;">
+<div id="DivTop">
+<p style='font-size:30px;font-weight:bold;'>
+PlaneAIのheadPlaneAI5_0.jsをテストする
+<br>
+<br>
+<br>
+
+使う機体も分離できる。<br>
+例えば、評価関数を変えたときに違いを見るのに便利<br>
+<br>
+ヘダーを自動で読み込み開始するHeadersに入れる
+
+
+
+
+
+経験１０回のアルゴリズムの改良<br>
+<br>
+
+
+
+
+
+weightを各actionのフォルダに置くようにする<br>
+練習用に爆発とかしないでどんどんプレイできるように、フラグをもちいて簡単に練習モードにできるようにする。<br>
+<br>
+
+<br>
+<br>
+ステージ名がフェードインしてフェードアウトするようにする<br>
+チャンスを逃した回数<br>
+タイマーをきちんと表示させる<br>
+敵から弾が出ないときがある<br>
+自機を真ん中に表示させる<br>
+タイトルコールを真ん中に入れるstage1とか<br>
+enemy3が第三ステージに現れないバグが発生<br>
+タイトルの音楽が止まらない現象（特に、やられた後、すぐにスペースで始めた場合）<br>
+タイムトライアルは常に一対一。時間内に、そして、やられるまでに何機を撃墜したかをランキング形式で競う<br>
+自機をやっつけた敵機のプレビュー<br>
+
+
+</p>
+</div>
+</body>
+</html>

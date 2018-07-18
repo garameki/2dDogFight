@@ -1,0 +1,54 @@
+<!DOCTYPE html><html><head>
+<script type='text/javascript'>FileRelative=function(fnBeUsed,fnUser){	this.bu=fnBeUsed;	this.u=fnUser;};FR=new Array();</script>
+<script type='text/javascript' src='./library.js'></script>
+
+<script type='text/javascript' src='./evDrag.js'></script>
+<script type='text/javascript' src='./makeElement.js'></script>
+<script type='text/javascript' src='./addKeyToMenu.js'></script>
+<script type='text/javascript' src='./classModalWindow.js'></script>
+<script type='text/javascript' src='./modalWindowInput3.js'></script>
+
+<script type='text/javascript'>
+
+//onload内にscriptを加えないでください
+//ロードチェッカー3秒間
+onload=function(){
+	var flag,count=0;var hoge = setInterval(function(){flag=true;for(var ii=0,len=FR.length;ii<len;ii++){flag = flag && (FR[ii].bu in window);if(!flag)break;};if(flag){	clearInterval(hoge);start();}else if(++count>30){clearInterval(hoge);console.error(FR[ii].u,"で使用する外部ファイル",FR[ii].bu,"が読み込まれていません");}},100);
+};//onload
+
+$testevent=false;
+
+
+
+
+start=function(){
+
+
+
+	Body = document.getElementsByTagName('Body')[0];
+
+	var eleDiv=makeDiv(IDMenu,0,0);
+
+	var eleCreate=makeCanvas(IDCreate,Relative,0,0,200,50);
+	eleDiv.appendChild(eleCreate);
+	eleDiv.appendChild(document.createElement('br'));
+
+	var eleCanvas=makeCanvas(IDPlate,Relative,0,0,200,50);
+	eleDiv.appendChild(eleCanvas);
+	eleDiv.appendChild(document.createElement('br'));
+
+	var eleCanvas=makeCanvas(IDPlate,Relative,0,0,200,50);
+	eleDiv.appendChild(eleCanvas);
+	eleDiv.appendChild(document.createElement('br'));
+
+	Body.appendChild(eleDiv);
+
+
+};
+
+
+
+
+</script></head><Body><div></div></Body></html>
+
+

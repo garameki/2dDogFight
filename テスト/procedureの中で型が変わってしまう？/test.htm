@@ -1,0 +1,39 @@
+<!DOCTYPE html><html><head>
+<script type='text/javascript'>
+
+var accum="";
+
+
+var func = function(num1){
+	var num=num1;
+
+	accum+=num.toString();
+	Test.inerText=accum;
+
+	var insProc = new function(){
+		accum+=num.toString();
+		Test.innerText=accum;
+
+		return {
+			print:function(){
+				//nothing
+				accum+=num.toString();
+				Test.innerText=accum;
+			}
+		};
+	};
+
+	insProc.print();	
+};
+
+onload = function(){
+
+
+	
+	func(5);
+
+
+
+};
+
+</script></head><body><div><p id="Test"></p><p style='font-size:25px;'>•Ï”num‚ÌŒ^‚Í•Ï‰»‚µ‚Ä‚Í‚¢‚È‚©‚Á‚½B</p></div></body></html>

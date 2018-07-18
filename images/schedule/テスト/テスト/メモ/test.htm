@@ -1,0 +1,46 @@
+<!DOCTYPE html><html><head>
+<script type='text/javascript'>
+
+onload=function(){
+
+	//divの位置は.offsetLeft,.offsetTopで取得
+	//divの幅は.style.width='300px'で設定
+	//divの高さは.style.height='300px'で設定
+
+	window.status='left:'+d1.offsetLeft.toString()+'px  Top:'+d1.offsetTop.toString()+'px';
+
+
+	//canvasの設定
+
+	var can=document.createElement('canvas');
+	can.width=100;//px?->pxいらない
+	can.height=100;//px?
+	var ctx=can.getContext('2d');
+	ctx.fillStyle='green';
+	ctx.fillRect(0,0,can.width,can.height);
+	document.getElementsByTagName('body')[0].appendChild(can);
+	can.onclick=function(e){
+		console.log("event=",e);
+	};
+	can.offsetLeft=100;//だめ
+	can.clientLeft=100;//だめ
+
+	can.style.position='absolute';//正解
+	can.style.left='100px';//<---書き込み
+
+	console.log("Left=",can.offsetLeft);//<---読み出し(数値のみが得られます)
+
+	can.onmousemove=function(event){
+
+		//イベントが起こった場所のマウスの絶対座標の位置は.clientX,Y
+						//相対座標の位置は.offsetX,Y
+		window.status=event.clientX.toString()+'px  '+event.clientY.toString()+'px  '+event.offsetX.toString()+'px  '+event.offsetY.toString()+'px';
+
+	};
+
+};
+
+
+
+</script>
+</head><body><div id="d1" style="position:absolute;left:200px;top:350px;"><p>こんにちわ</p></div></body></html>

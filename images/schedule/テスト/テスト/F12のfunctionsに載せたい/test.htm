@@ -1,0 +1,29 @@
+<!DOCTYPE html><html><head>
+<script type='text/javascript'>
+
+console.log("+++++++++++++++++++++++++++++++++++++++++++++");
+var FF=function(){
+	this.check=function(){
+		console.log(1);
+	};
+	FF.check=function(){
+		console.log(4);
+	};
+};
+FF.prototype.check=function(){
+	console.log(2);
+};
+FF.check=function(){
+	console.log(3);
+};
+(new FF()).check();
+FF.check();
+console.log(new FF());
+
+
+console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
+console.log("Ç≈Ç´Ç»Ç¢ÅIÅIÅI");
+
+</script>
+</head><body><div></div></body></html>

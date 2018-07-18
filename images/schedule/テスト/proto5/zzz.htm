@@ -1,0 +1,49 @@
+<!DOCTYPE html><html><head>
+<script type='text/javascript'>FileRelative=function(fnBeUsed,fnUser){	this.bu=fnBeUsed;	this.u=fnUser;};FR=new Array();</script>
+<script type='text/javascript'>onload=function(){	var flag,count=0;var hoge = setInterval(function(){flag=true;for(var ii=0,len=FR.length;ii<len;ii++){flag = flag && (FR[ii].bu in window);if(!flag)break;};if(flag){	clearInterval(hoge);start();}else if(++count>30){clearInterval(hoge);console.error(FR[ii].u,"で使用する外部ファイル",FR[ii].bu,"が読み込まれていません");}},100);};</script>
+<script type='text/javascript' src='./library.js'></script>
+<script type='text/javascript' src='./globalEvents.js'></script>
+<script type='text/javascript' src='./dragDiv.js'></script>
+<script type='text/javascript' src='./dragMenu.js'></script>
+<script type='text/javascript' src='./dragPlate.js'></script>
+<script type='text/javascript' src='./dragTree.js'></script>
+<script type='text/javascript' src='./makeElement.js'></script>
+<script type='text/javascript' src='./makeKey.js'></script>
+<script type='text/javascript' src='./makePlate.js'></script>
+<script type='text/javascript' src='./makeTree.js'></script>
+<script type='text/javascript' src='./makeMenu.js'></script>
+<script type='text/javascript' src='./addKeyToMenu.js'></script>
+<script type='text/javascript' src='./classModalWindow.js'></script>
+<script type='text/javascript' src='./modalWindowInput3.js'></script>
+
+<script type='text/javascript'>
+mainHTM=null;
+FR.push(new FileRelative('makeElementJS','mainHTM'));
+FR.push(new FileRelative('makeKeyJS','mainHTM'));
+FR.push(new FileRelative('makeMenuJS','mainHTM'));
+
+
+$testevent=false;
+
+start=function(){
+
+	//global variables
+	gBody = document.getElementsByTagName('Body')[0];
+	gBody.style.margin='0px'
+
+	createMenu();//●gDivMenuが生成され、DOMにくっついたり離れたりします。
+
+
+};
+//右クリックメニューを消す
+window.addEventListener('contextmenu',function(event){
+//	event.stopPropagation();//第三引数がtrueだからcapturePhaseで一番最初に伝播をキャンセルするのはまずい
+	event.preventDefault();
+},true);
+
+
+
+
+</script></head><body></body></html>
+
+

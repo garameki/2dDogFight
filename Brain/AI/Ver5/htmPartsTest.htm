@@ -1,0 +1,46 @@
+<!DOCTYPE html><html><head>
+<script type='text/javascript'>
+
+//headerは、ここではテストしないでください。パスが異なります。
+
+onload=function(){
+
+	var con1 = 'ww5' in window;
+	var con4 = 'AI5_0' in window;
+	var con5 = 'AIClearInput5_0' in window;
+	var con6 = 'AIStoreInfo5_0' in window;
+	var con2 = 'AIDecideShoot5_0' in window;
+	var con3 = 'AILearnShoot5_0' in window;
+	var con7 = 'AIDecideAngle5_0' in window;
+	var con8 = 'AILearnAngle5_0' in window;
+	var con9 = 'AIDecideSpeed5_0' in window;
+	var con10 = 'AILearnSpeed5_0' in window;
+	var con = '' in window;
+
+	var count=0;
+	var hoge = setInterval(function(){
+		if(con1 && con2 && con3 && con4 && con5 && con6 && con7 && con8 && con9 && con10){
+			test.innerText=ww5.weight13[3][3];
+			clearInterval(hoge);
+		};
+		if(count>20){
+			console.log("timeout");
+			clearInterval(hoge);
+		};
+		console.log(count);
+		count++;
+	},100);
+
+
+};
+
+
+
+</script>
+<script type='text/javascript' src='./aiWeight5_0prototype.js'></script>
+<script type='text/javascript' src='./ai5_0prototype.js'></script>
+<script type='text/javascript' src='./aboutInput5_0prototype.js'></script>
+<script type='text/javascript' src='./aboutAngle5_0prototype.js'></script>
+<script type='text/javascript' src='./aboutShoot5_0prototype.js'></script>
+<script type='text/javascript' src='./aboutSpeed5_0prototype.js'></script>
+</head><body><div><p id='test'>ほげ</p></div></body></html>

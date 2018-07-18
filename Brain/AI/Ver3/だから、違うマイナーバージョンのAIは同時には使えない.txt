@@ -1,0 +1,71 @@
+違うマイナーバージョンを使いたい場合には
+AIVer3 = functionと
+AIVer3_1 =functionをつくり、
+
+オブジェクトの関数も
+AIVer3.prototype.....と
+AIVer3_1.prototype......をあらたに全て作る
+
+
+
+...........
+
+
+
+そう考えると、
+
+クラス名.prototype.関数名=関数 をファイルからインポートして使うやり方はやめて、
+プロシージャをファイルからインポートして、
+ヘダー内で
+クラス名.prototype.プロパティ=プロシージャとした方がパーツの互換性が良い
+そして、使うときにはインスタンスをわたせばいいのではないのだろうか。
+
+ai3_1 = new this.プロパティ;
+aa = new PlaneAIVer3_1(...... , ai3_1);
+
+
+
+
+
+いままで
+ai.storeInfo();
+とできたのは、
+AIVer3.prototype.storeInfo = function(){
+がファイルからインポートされていたから
+
+これを新たな方法で
+ai.storeInfo();とやるには
+
+
+//本体
+AIVer3_1 = function (){
+
+
+	var layerInput[...........];
+
+
+
+
+	var opInput = new this.procInput(layerInput);←このprocInputがクラス名.prototype.プロパティを用いた部分
+				　　　　　┗入力層のポインタを渡しておく
+
+
+
+
+	return {
+		storeInfo:opInput();←パーツのInputVer0が動く
+	};
+};
+
+//ヘダー
+AIVer3_1.prototype.procInput = InputVer0;
+
+
+
+
+
+
+
+AIVer3_1.prototype.プロパティ=関数名(プロシージャ)
+
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html><html><head><script type='text/javascript'>
+
+flagStop=false;
+Headers="";
+
+onload=function(){
+
+
+	eval(Headers);
+
+	var count=0;
+	var hoge=setInterval(function(){
+		if('PrintCounterDown' in window){
+			var aa = new PrintCounterDown(3);
+			aa.start();
+			clearInterval(hoge);
+		};
+		if(++count>20){
+			console.log("function‚ªÀs‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B");
+			clearInterval(hoge);
+		};
+	},100);
+};
+
+
+
+
+</script>
+<script type='text/javascript' src='./globalVariables_2.js'></script>
+</head><body style='background-color:black;'><div id='DivTop'></div></body></html>

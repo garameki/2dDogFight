@@ -1,0 +1,57 @@
+
+
+//Fri Jan 12 2018 17:36:24 GMT+0900 (東京 (標準時))
+
+Headers +='headerPlaneAI5_1();\n';//こいつをaction.htmでeval()
+
+var headerPlaneAI5_1 = function(){
+
+	const folda = '../Plane/AI/parts/';
+
+
+	var names=new Array();
+
+	//PlaneAIの部品
+	names.push('motion_1.js');
+	names.push('evaluateAngle_0.js');
+	names.push('evaluateCollision_1.js');
+	names.push('evaluateSpeed_0.js');
+	names.push('evaluateShoot_1.js');
+	names.push('ssPlaneAI5_1.js');
+//○	names.push('ssPlaneAI5_0.js');
+	
+	//headerのidを取得
+	var headId=document.getElementsByTagName("head")[0];
+	var tagNew;
+	for(var ii=0;ii<names.length;ii++){
+		tagNew = document.createElement("script");
+		tagNew.setAttribute("type","text/javascript");
+		tagNew.setAttribute("src",folda+names[ii]);
+		tagNew.setAttribute("charset","Shift_JIS");
+		headId.appendChild(tagNew);
+	};
+
+	//ここでplaneの機能拡張 proc*はPlaneAIの中でプロシージャとして使われます。
+	var counter=0;
+	var hoge = setInterval(function(){
+		counter++;
+		if(counter>20 || flagStop){
+			info.caution("headPlaneAI5_1.js   PlaneAI5_1 is not defined !");
+			clearInterval(hoge);
+			flagStop=true;
+		};
+		if('PlaneAI5_1' in window){
+			PlaneAI5_1.prototype.procMotion=PlaneAIMotion0_1;//各ファイルの中の関数名を使います
+			PlaneAI5_1.prototype.procCollision=PlaneAIEvaluateCollision;//●Ver0を無くした
+			PlaneAI5_1.prototype.procAngle=PlaneAIEvaluateAngleVer0;
+			PlaneAI5_1.prototype.procSpeed=PlaneAIEvaluateSpeedVer0;
+			PlaneAI5_1.prototype.procShoot=PlaneAIEvaluateShootVer1;
+			clearInterval(hoge);
+			console.info("headerPlaneAI5_1 の準備が出来ました。 !");
+			console.info("'PlaneAI5_1'が生成されました。");
+		};
+	},100);
+
+};
+
+

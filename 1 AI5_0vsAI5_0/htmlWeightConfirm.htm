@@ -1,0 +1,74 @@
+<html>
+<head>
+
+
+<script type="text/javascript">
+//グローバル変数
+
+
+flagStop=false;//ここでの指定は必須
+Headers="";//ここでの指定は必須
+$test=false;//ここではtrueにしない。
+var ww1;
+var ww2;
+
+var read = function(ww){
+
+		ww1= new Weight30();
+		ww1.setName('ww1');
+		ww1.readWeight();//ここをコメントアウトすると初期化します
+
+//		ww2= new Weight30();
+//		ww2.setName('ww2');
+//		ww2.readWeight();//ここをコメントアウトすると初期化します
+
+};
+
+
+onload = function () {
+
+
+	eval(Headers);//headerAI5_0,headerPlaneAI5_0がいまのところ使用可能
+	globalVariables();
+
+	var count=0;
+	var hogeInit = setInterval(function(){//強制2秒ヘダー読み込み待ち
+		if('Weight30' in window && 'Weight30_prototype_printContent' in window){
+			clearInterval(hogeInit);
+			Weight30.prototype.printContent = Weight30_prototype_printContent;
+
+			ww1=new Weight30;
+			ww1.filename='C:\\Users\\usaku\\Documents\\games\\2dDogFight\\12 AI5_0vsAI5_0\\ai5weight.txt';
+			ww1.readWeight();
+			ww1.printContent(3);//1 or 2 or 3
+
+		//filename2='C:\\Users\\usaku\\Documents\\games\\2dDogFight\\12 AI5_0vsAI5_0\\ai4weight.txt';
+
+		}else{
+			count++
+			if(count>30){
+				clearInterval(hogeInit);
+				flagStop=true;
+				console.log("action.js     initialize();が実行できませんでした。");
+			};
+		};
+	},100);
+};
+</script>
+
+<script type="text/javascript" src="../Brain/AI/Ver5/headAI5_1confirm.js"></script>
+<script type="text/javascript" src="../globalVariables_1wide.js"></script>
+<script type="text/javascript" src="./Weight30_prototype_printContent.js"></script><!--weightの中身表示       -->
+
+</head>
+<!-- scroll bar disappear
+<body style="overflow:hidden;background-color:black;">
+-->
+<body style="background-color:black;">
+<div id="DivTop">
+<p id="tP" style='font-size:30px;font-weight:bold;background-color:red;'>
+PlaneAIのheadPlaneAI5_0.jsをテストする
+</p>
+</div>
+</body>
+</html>

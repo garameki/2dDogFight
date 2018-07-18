@@ -1,0 +1,36 @@
+<!DOCTYPE html><html><head><script type='text/javascript'>
+
+
+onload=function(){
+
+
+	var Test=function(){
+
+	this.sss=5;
+
+	};
+	Test.prototype.ttt=function(){
+
+	};
+
+	p1.innerText=Test.hasOwnProperty('ttt');
+	p2.innerText=(new Test).hasOwnProperty('ttt');
+	p3.innerText=Test.hasOwnProperty('sss');
+	p4.innerText=(new Test).hasOwnProperty('sss');
+	p5.innerText="";
+	var test=new Test();
+	for(var key in test){
+		p5.innerText+=key+" ";
+	};
+};
+</script></head><body><div>
+<p id='p1'></p>
+<p id='p2'></p>
+<p id='p3'></p>
+<p id='p4'></p>
+<p id='p5'></p>
+
+
+
+
+</div></body></html>

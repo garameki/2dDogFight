@@ -1,0 +1,28 @@
+<!DOCTYPE html><html><head>
+<script type='text/javascript' src='../../library/angleOppositeToXAxis.js'></script>
+<script type='text/javascript'>
+
+
+
+onload=function(){
+
+
+	
+	var div = document.createElement('div');
+	div.setAttribute('style','position:absolute;left:0px;top:0px;color:white;z-index:100;');
+	div.innerHTML='<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq';
+	document.getElementsByTagName('body')[0].appendChild(div);
+
+	var canvas = document.createElement('canvas');
+	canvas.setAttribute('style','position:absolute;left:0px;top:0px;');
+	canvas.setAttribute('width',window.innerWidth);
+	canvas.setAttribute('height',window.innerHeight);
+	document.getElementsByTagName('div')[0].appendChild(canvas);
+
+
+//	window.onclick=function(event){console.log("window");event.stopPropagation();};
+	window.addEventListener('click',function(event){console.log("window");},true);
+	div.addEventListener('click',function(event){console.log("div");},false);
+	canvas.addEventListener('click',function(event){console.log("canvas");});
+};
+</script></head><body style="font-size:25px;background-color:black;"></body></html>

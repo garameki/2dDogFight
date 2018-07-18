@@ -1,0 +1,52 @@
+<!DOCTYPE html><html><head>
+<script type='text/javascript'>
+
+var func = function(a,b,c){
+	console.log("func  ",a,b,c);
+};
+
+
+
+var subfunc = function(){
+
+	//引数を変数へ代入
+	var len = arguments.length;
+	for(var ii=0;ii<len;ii++){
+		eval('arg'+ii.toString()+"=arguments["+ii.toString()+"]");
+	};
+	for(var ii=0;ii<len;ii++)eval("console.log(arg"+ii.toString()+");");
+
+	var args="";
+	for(var ii=0;ii<len;ii++){
+		args+='arg'+ii.toString();
+		if(ii+1!=len)args+=',';
+	};
+	eval("func.call(this,"+args+");");			
+};
+
+onload = function(){
+
+	var aa = new subfunc(5,6,7);
+
+	var bb = new func(8,9,10);
+};
+
+
+
+</script></head><body><div><p style='font-size:25px;font-family:"江戸勘定流,魚石行書";'>
+
+<br>
+<br>
+どちらからも、インスタンスを作ることに成功しました。
+<br>
+<br>
+
+
+
+</p></div></body></html>
+
+
+
+
+
+

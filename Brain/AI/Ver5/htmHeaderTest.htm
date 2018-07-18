@@ -1,0 +1,54 @@
+<!DOCTYPE html><html><head>
+<script type='text/javascript'>
+
+//headerのパスを変えてテストしてください
+
+Headers = "";//必須
+flagStop=false;//必須
+$test=true;
+
+onload=function(){
+
+	eval(Headers);//ヘダーの実行
+
+	var count=0;
+	var hoge = setInterval(function(){
+
+		var con1 = 'headerAI5_2_1' in window;
+		var con2 = 'AI5_2' in window;
+		var con3 = 'AIClearInput5_1' in window;
+		var con4 = 'AIStoreInfo5_1' in window;
+		var con5 = 'AIDecideShoot5_1' in window;
+		var con6 = 'AILearnShoot5_1' in window;
+		var con7 = 'AIDecideAngle5_1' in window;
+		var con8 = 'AILearnAngle5_1' in window;
+		var con9 = 'AIDecideSpeed5_1' in window;
+		var con10 = 'AILearnSpeed5_1' in window;
+		var con = '' in window;
+
+		if(con1){// && con2 && con3 && con4 && con5 && con6 && con7 && con8 && con9 && con10){
+			//test.innerText=ww5.weight13[3][3];
+			test.innerText='success';
+			clearInterval(hoge);
+		};
+		if(count>20){
+			console.log("timeout");
+			clearInterval(hoge);
+			flagStop=true;
+		};
+		console.log(count);
+		count++;
+	},100);
+
+
+};
+
+
+
+</script>
+<!--
+<script type='text/javascript' src='./txtHeader5_2_1.txt'></script>
+-->
+<script type='text/javascript' src='./headAI5_2_1prototype.js'></script>
+
+</head><body><div><p id='test'>ほげ</p></div></body></html>

@@ -1,0 +1,85 @@
+
+
+//Mon Jan 01 2018 17:28:21 GMT+0900 (東京 (標準時))
+
+Headers +='headerPlaneAI5_1_1();\n';//こいつをaction.htmでeval()
+
+var headerPlaneAI5_1_1 = function(){
+
+	const folda = '../Plane/AI/parts/';
+
+
+	var names=new Array();
+
+	//PlaneAIの部品
+	names.push('motion_1.js');
+	names.push('evaluateAngle0_1.js');//★
+	names.push('evaluateCollision_1.js');
+	names.push('evaluateSpeed_0.js');
+	names.push('evaluateShoot_1.js');
+	names.push('ssPlaneAI5_1.js');
+	
+	//headerのidを取得
+	var headId=document.getElementsByTagName("head")[0];
+	var tagNew;
+	for(var ii=0;ii<names.length;ii++){
+		tagNew = document.createElement("script");
+		tagNew.setAttribute("type","text/javascript");
+		tagNew.setAttribute("src",folda+names[ii]);
+		tagNew.setAttribute("charset","Shift_JIS");
+		headId.appendChild(tagNew);
+	};
+
+	//ここでplaneの機能拡張 proc*はPlaneAIの中でプロシージャとして使われます。
+	var counter=0;
+	var hoge = setInterval(function(){
+		counter++;
+		if(counter>20 || flagStop){
+			info.caution("headPlaneAI5_1_1.js   PlaneAI5_1 is not defined !");
+			clearInterval(hoge);
+			flagStop=true;
+		};
+		if('PlaneAI5_1' in window){
+
+			//●ここから　新しいサブクラスを作成
+			PlaneAI5_1_1 = function(){
+				//引数を変数へ代入
+				var len = arguments.length;
+				for(var ii=0;ii<len;ii++){
+					eval('arg'+ii.toString()+"=arguments["+ii.toString()+"]");
+				};
+				//for(var ii=0;ii<len;ii++)eval("console.log(arg"+ii.toString()+");");
+				//callの準備
+				var args="";
+				for(var ii=0;ii<len;ii++){
+					args+='arg'+ii.toString();
+					if(ii+1!=len)args+=',';
+				};
+				eval("PlaneAI5_1.call(this,"+args+");");			
+			};
+			inherits(PlaneAI5_1_1,PlaneAI5_1);
+			//●ここまで
+
+
+
+
+
+
+
+
+
+			PlaneAI5_1_1.prototype.procMotion=PlaneAIMotion0_1;//各ファイルの中の関数名を使います
+			PlaneAI5_1_1.prototype.procCollision=PlaneAIEvaluateCollision;//Ver0を無くした
+			PlaneAI5_1_1.prototype.procAngle=PlaneAIEvaluateAngle0_1;
+			PlaneAI5_1_1.prototype.procSpeed=PlaneAIEvaluateSpeedVer0;
+			PlaneAI5_1_1.prototype.procShoot=PlaneAIEvaluateShootVer1;
+
+			clearInterval(hoge);
+			console.info("headerPlaneAI5_1_1 の準備が出来ました。 !");
+			console.info("'PlaneAI5_1_1'が生成されました。");
+		};
+	},100);
+
+};
+
+

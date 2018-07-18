@@ -1,0 +1,42 @@
+<!DOCTYPE html><html><head>
+<script type='text/javascript'>
+onload=function(){
+	d1.addEventListener('mousedown',function(event){
+		console.log("d");
+	},true);
+
+	c1.width=window.innerWidth;
+	c1.height=window.innerHeight;
+	c1.style.position='absolute';
+	c1.style.zIndex=2;
+	c1.addEventListener('mousedown',function(event){
+		console.log("1");
+	});
+
+	c2.width=window.innerWidth;
+	c2.height=window.innerHeight;
+	c2.style.position='absolute';
+	c2.style.zIndex=3;
+	c2.addEventListener('mousedown',function(event){
+		console.log("2");
+	});
+
+	c3.width=window.innerWidth;
+	c3.height=window.innerHeight;
+	c3.style.zIndex=2;
+	c3.style.position='absolute';
+	c3.addEventListener('mousedown',function(event){
+		console.log("3");
+	});
+
+	c2.draggable=true;
+	c2.ondragstart=function(event){console.log(event);};
+
+};
+</script></head><body>
+<div id="d1">
+<canvas id="c1"></canvas>
+<canvas id="c3"></canvas>
+<canvas width="1107" height="787" id="c2" style="margin: 26px; padding: 32px; border-radius: 20px; border: 20px solid red; border-image: none; position: absolute; z-index: 3; background-color: green;"></canvas>
+</div>
+</body></html>

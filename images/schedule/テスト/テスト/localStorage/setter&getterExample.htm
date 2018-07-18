@@ -1,0 +1,42 @@
+<!DOCTYPE html><html><head><script type='text/javascript'>
+
+
+var aa=new(function(){
+	this.a=5;
+})();
+
+console.log("aa.a=",aa.a,"<-コンストラクタのthis.a");
+
+Object.defineProperty(aa,'b',new (function(){//オブジェクトbを作成
+	var ans=500;
+
+	console.log("this=",this);
+
+	this.get=function(){
+
+		console.log("get");
+		return ans;
+
+	};
+
+	this.set=function(newValue){//代入記号=によって値を設定するときにthis.setが呼び出される
+console.log("set");
+		this.a=newValue;
+
+	};
+})());
+
+
+console.log("aa.b=",aa.b);
+
+//aa.b=30;//this.setが呼び出される
+
+
+console.log("aa.a=",aa.a);
+console.log("aa.b=",aa.b);//bというpropertyは存在するのだが、getterが存在しないのでundefinedとなる
+
+
+
+
+
+</script></head><body><div></div></body></html>

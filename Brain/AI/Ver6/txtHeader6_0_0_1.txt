@@ -1,0 +1,131 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Fri Jan 12 2018 17:36:24 GMT+0900 (東京 (標準時))
+
+Headers +='headerAI6_0_0_1();\n';//こいつをaction.htmでeval()
+
+
+var headerAI6_0_0_1 = function(){
+
+
+	var  folda = '../Brain/AI/Ver6/';
+
+	var ids=new Array();
+
+	//AIの部品
+
+	//Weight30
+	ids.push('classWeight30_0');
+
+	ids.push('funcAngleDecide6_0');
+	ids.push('funcAngleLearn6_0');
+	ids.push('funcInputClear6_0');
+	ids.push('funcInputStore6_1');
+	ids.push('funcShootDecide6_0');
+	ids.push('funcShootLearn6_0');
+	ids.push('funcSpeedDecide6_0')
+	ids.push('funcSpeedLearn6_0')
+	ids.push('classAIConstructor6_0');
+	//headerのidを取得
+	var headId=document.getElementsByTagName("head")[0];
+
+	var tag;
+	for(var ii=0;ii<ids.length;ii++){
+		if(ids[ii] in window){//同じものはincludeしない
+			//nothing
+		}else{
+			tag = document.createElement("script");
+			tag.setAttribute("type","text/javascript");
+			tag.setAttribute("id",ids[ii]);
+			tag.setAttribute("src",folda+ids[ii]+'.js');
+			tag.setAttribute("charset","Shift_JIS");
+			headId.appendChild(tag);
+		};
+	};
+	var count=0;
+	var hoge = setInterval(function(){
+
+		var conAIConstructor	= 'AIConstructor6_0' in window;
+		var conAngleDecide	= 'AngleDecide6_0'	in window;
+		var conAngleLearn		= 'AngleLearn6_0'	in window;
+		var conInputClear		= 'InputClear6_0'	in window;
+		var conInputStore		= 'InputStore6_1'	in window;
+		var conShootDecide	= 'ShootDecide6_0'	in window;
+		var conShootLearn		= 'ShootLearn6_0'	in window;
+		var conSpeedDecide	= 'SpeedDecide6_0' in window;
+		var conSpeedLearn		= 'SpeedLearn6_0'	in window;
+		var conWeight		= 'Weight30_0'		in window;
+
+		var con = conAIConstructor && conAngleDecide && conAngleLearn && conInputClear && conInputStore && conShootDecide && conShootLearn && conSpeedDecide && conSpeedLearn && conWeight;
+
+
+
+		if(con){
+			clearInterval(hoge);
+
+			//新しいサブクラスを作成
+			AI6_0_0_1 = function(){
+				//引数を変数へ代入
+				var len = arguments.length;
+				for(var ii=0;ii<len;ii++){
+					eval('arg'+ii.toString()+"=arguments["+ii.toString()+"]");
+				};
+				//for(var ii=0;ii<len;ii++)eval("console.log(arg"+ii.toString()+");");
+				//callの準備
+				var args="";
+				for(var ii=0;ii<len;ii++){
+					args+='arg'+ii.toString();
+					if(ii+1!=len)args+=',';
+				};
+				eval("AIConstructor6_0.call(this,"+args+");");			
+			};
+			inherits(AI6_0_0_1,AIConstructor6_0);
+
+			//左が変わったら、PlaneAIに影響が出る
+			AI6_0_0_1.prototype.clearInput 	=InputClear6_0;
+			AI6_0_0_1.prototype.storeInfo 	=InputStore6_1;
+			AI6_0_0_1.prototype.decideAngle 	=AngleDecide6_0;
+			AI6_0_0_1.prototype.learnAngle 	=AngleLearn6_0;
+			AI6_0_0_1.prototype.decideSpeed 	=SpeedDecide6_0;
+			AI6_0_0_1.prototype.learnSpeed 	=SpeedLearn6_0;
+			AI6_0_0_1.prototype.decideShoot 	=ShootDecide6_0;
+			AI6_0_0_1.prototype.learnShoot 	=ShootLearn6_0;
+			console.info("'AI6_0_0_1'が生成されました。");
+
+			//console.info("headerAI6_0_0_1 の準備が出来ました。 !");
+
+		};
+
+		//エラー処理
+		if(++count>20 || flagStop){
+			clearInterval(hoge);
+			flagStop=true;
+			if(!conAIConstructor)	console.error("headAI6_0_0_1.js     'AIConstructor6_0'が未定義です");
+			if(!conAngleDecide)	console.error("headAI6_0_0_1.js     'AngleDecide6_0'が定義されていません");
+			if(!conAngleLearn)	console.error("headAI6_0_0_1.js     'AngleLearn6_0'が定義されていません");
+			if(!conInputClear)	console.error("headAI6_0_0_1.js     'InputClear6_0'が定義されていません");
+			if(!conInputStore)	console.error("headAI6_0_0_1.js     'InputStore6_1'が定義されていません");
+			if(!conShootDecide)console.error("headAI6_0_0_1.js     'ShootDecide6_0'が定義されていません");
+			if(!conShootLearn)	console.error("headAI6_0_0_1.js     'ShootLearn6_0'が定義されていません");
+			if(!conSpeedDecide)console.error("headAI6_0_0_1.js     'SpeedDecide6_0'が定義されていません");
+			if(!conSpeedLearn)	console.error("headAI6_0_0_1.js     'SpeedLearn6_0'が定義されていません");
+			if(!conWeight)	console.error("headAI6_0_0_1.js     'classWeight30_0'が定義されていません");
+		};
+
+//console.log("hoge count=",count);
+	},100);
+
+};
+
+

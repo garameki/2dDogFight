@@ -1,0 +1,101 @@
+<!DOCTYPE html><html><head>
+<script type='text/javascript'>
+
+//headerのパスを変えてテストしてください
+
+Headers = "";//必須
+flagStop=false;//必須
+$test=false;//フォルダへのパスを変えるのに使っています
+if(!('inherits' in window)){
+	console.log("inheritsがincludeされていません。作成します。");
+	//●継承用
+	inherits = function(childCtor, parentCtor) {
+	  /** @constructor */
+	  function tempCtor() {};
+	  tempCtor.prototype = parentCtor.prototype;
+	  childCtor.superClass_ = parentCtor.prototype;
+	  childCtor.prototype = new tempCtor();
+	  /** @override */
+	  childCtor.prototype.constructor = childCtor;
+	};
+};
+
+if(!('info' in window)){
+	console.log("infoがincludeされていません。簡易版を作成します。");
+	info = {
+		text:function(strings){
+			console.log(strings);
+		},
+		caution:function(strings){
+			console.debug(strings);
+		},
+		overtime:function(str1,str2){
+			console.debug(str1,":",str2);
+		}
+	};
+};
+
+onload=function(){
+
+	eval(Headers);//ヘダーの実行
+
+	var funcs=new Array();
+
+	funcs.push('BeamAI2_0');
+	funcs.push('PlaneAI6_0_0_0');
+	funcs.push('AI6_0_0_3');
+	funcs.push('globalVariables');
+//	funcs.push('CanvasWidth');
+
+
+	var con;
+	var count=0;
+	var hogeOnload = setInterval(function(){
+		con = true;
+		for(var ii=0;ii<funcs.length;ii++){
+			con = con && (funcs[ii] in window);
+		};
+		if(con){
+			initialize();
+			clearInterval(hogeOnload);
+		};
+		if(++count>20){
+			clearInterval(hogeOnload);
+			console.error("関数がそろいません");
+		};
+	},100);
+};
+
+var initialize = function(){
+
+	var pointOfView ='fighter';
+
+	var ww2= new Weight30_0('C:\\Users\\usaku\\Documents\\games\\2dDogFight\\Plane\\AI\\testWeight\\weightPlane6_0_0_0AI6_0_0_3-1.txt');
+	var enemy = new PlaneAI6_0_0_0('enemy','yanbeam','fighter',pointOfView,AI6_0_0_3,ww2,15);
+	var enemyBeam = new BeamAI2_0('yanbeam','enemy');
+	
+	var ww1= new Weight30_0('C:\\Users\\usaku\\Documents\\games\\2dDogFight\\Plane\\AI\\testWeight\\weightPlane6_0_0_0AI6_0_0_3-1.txt');
+	var aa = new PlaneAI6_0_0_0('fighter','mybeam','enemy',pointOfView,AI6_0_0_3,ww1,15);
+	var myb = new BeamAI2_0('mybeam','fighter');
+
+};
+
+
+</script>
+
+<script type='text/javascript' src='../globalVariables_2.js'></script>
+<script type="text/javascript" src='../../library/angleOppositeToXAxis.js'></script>
+<script type="text/javascript" src='../../library/XYAfterRotation.js'></script>
+<script type="text/javascript" src='../eventListners.js'></script>
+<script type='text/javascript' src='../Sprite.js'></script>
+<script type='text/javascript' src='../Plane/AI/headPlaneAI6_0_0_0.js'></script>
+<script type='text/javascript' src='../Brain/AI/Ver6/headAI6_0_0_3.js'></script>
+<script type='text/javascript' src='../Beam/AI/ssBeamAI2_0.js'></script>
+
+
+</head>
+<body style="overflow:hidden;background-color:black;">
+<div id="DivTop">
+</div>
+</body>
+</html>

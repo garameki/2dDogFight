@@ -1,0 +1,298 @@
+<!DOCTYPE html><html><head><script type='text/javascript'>
+
+/*
+	注意：divのchildはposition:relativeでないと、divにoffsetWidthとoffsetHeightが付かないよクリック等に反応しないよ
+
+	注意：body以外のelement.style.zIndexにはすべてNumZindex()で連番を振らないと、ソートできないよ
+*/
+
+
+
+
+
+var Counter=function(start){
+	var num=start;
+	return function(){
+		return num++;
+	};
+};
+var NumZindex=new Counter(2);
+
+var NumCanvas=new Counter(0);
+var makeCanvas=function(){
+	var ele=document.createElement('canvas');
+	ele.setAttribute('id','Canvas'+NumCanvas().toString());
+	ele.width=200;
+	ele.height=50;
+//	ele.style.position='absolute';
+	ele.style.position='relative';
+	ele.draggable=false;
+	ele.style.zIndex=NumZindex();
+	var ctx=ele.getContext('2d');
+	ctx.font="bold 30px 'ＭＳ 明朝'";
+	ctx.fillStyle='green';
+	ctx.fillText('古今東西',0,30);
+
+	ele.onclick=function(event){
+		console.log("click",ele.id,event);
+	};
+	return ele;
+};
+
+var NumDiv=new Counter(0);
+var makeDiv=function(left,top){
+	var ele=document.createElement('div');
+	ele.setAttribute('id','Div'+NumCanvas().toString());
+	ele.style.position='absolute';
+//	ele.style.position='relative';
+	ele.draggable=false;
+	ele.style.left=left.toString()+'px';
+	ele.style.top=top.toString()+'px';
+	ele.style.zIndex=NumZindex();
+
+	ele.onclick=function(event){
+		console.log("click",ele.id,event);
+	};
+	ele.ondragstart=function(event){
+		event.preventDefault();
+		event.stopPropagation();
+	};
+	return ele;
+
+};
+
+
+
+var sortByZindex = function(arr){
+	//注意：body以外のelementにはすべてNumZindex()で連番を振らないと、ソートできないよ
+
+
+	//中央値を決めて左右に分けよう。
+	var order = function(arr){
+		var len,sum,med;
+		var small,large;
+		var smalls=new Array();
+		var larges=new Array();
+
+		sum=0;
+		len=arr.length;
+		if(len==1)return arr;
+		if(len==0)return [];
+
+		for(var ii=0;ii<len;ii++){
+			if(arr[ii].style.zIndex)sum+=arr[ii].style.zIndex;
+			else console.error("z-indexが定義されていません",arr[ii]);
+		};
+		med=sum/len;
+
+		for(var ii=0;ii<len;ii++){
+			if(arr[ii].style.zIndex>med){
+				larges.push(arr[ii]);
+			}else{
+				smalls.push(arr[ii]);
+			};
+		};
+		small=order(smalls);
+		large=order(larges);
+//		small.splice(small.length,0,large);
+//		return small.concat(larges);//昇順
+		return large.concat(small);//降順
+	};
+
+	var res = order(arr);
+	return res;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+	マウスアップまたはマウスダウンされたときにその上空にあるelementを重なり順に拾い上げる
+		//視点は宇宙にあって、地表がwindow。高い位置の方がz-indexが大きいイメージ
+		//gUpperElementsOnmouseupとgUpperElementsOnmousedownにz-indexの順番に入る
+*/
+
+var gUpperElementsOnmouseup=[];
+var gUpperElementsOnmousedown=[];
+var getUpperElements=function(event){
+	//注意：divのchildはposition:relativeでないと、divにoffsetWidthとoffsetHeightが付かないよクリック等に反応しないよ
+	//注意：body以外のelement.style.zIndexにはすべてNumZindex()で連番を振っておくこと
+
+	var test=false;
+
+	var cx=event.clientX;
+	var cy=event.clientY;
+
+	//DOMツリーを辿ります
+	var bod=document.getElementsByTagName('body')[0];
+	var eles=new Array();//クリック時に上空にあるelements
+	var search=function(ele){
+		//elesに条件に合ったものを入れていきます
+		if(test)console.log("ele=",ele);
+		var left=ele.offsetLeft;
+		var top=ele.offsetTop;
+		if(test)console.log("top=",top);
+		var parent=ele;
+		while(parent.parentNode!=null && parent!=bod){
+			parent=parent.parentNode;
+			left+=parent.offsetLeft;
+			top+=parent.offsetTop;
+			if(test)console.log("top2=",parent.offsetTop,parent);
+		};
+		var right=left+ele.offsetWidth;
+		var bottom=top+ele.offsetHeight;
+		if(cx>left && cx<right && cy>top && cy<bottom)eles.push(ele)
+
+
+		for(var ii=0,len=ele.children.length;ii<len;ii++){
+			search(ele.children[ii]);
+		};
+	};
+	search(bod);//elesに入る
+
+	if(test)console.log("before childs=",eles);
+
+	eles = sortByZindex(eles);
+
+	if(test)console.log("after childs");
+	if(test)for(var ii=0,len=eles.length;ii<len;ii++)console.log("2=",eles[ii]);
+
+	if(test)console.log("kind=",event.type);
+	if(event.type=='mouseup'){
+		gUpperElementsOnmouseup=eles;
+	}else if(event.type=='mousedown'){
+		gUpperElementsOnmousedown=eles;
+	};
+//console.log("gUpperElementsOnmouseup=",gUpperElementsOnmouseup);
+//for(var ii=0,len=gUpperElementsOnmouseup.length;ii<len;ii++)console.log("up element=",gUpperElementsOnmouseup[ii],"  z-index=",gUpperElementsOnmouseup[ii].style.zIndex);
+//console.log("gUpperElementsOnmousedown=",gUpperElementsOnmousedown);
+//for(var ii=0,len=gUpperElementsOnmousedown.length;ii<len;ii++)console.log("down element=",gUpperElementsOnmousedown[ii],"  z-index=",gUpperElementsOnmousedown[ii].style.zIndex);
+};
+window.addEventListener('mouseup',getUpperElements,true);
+window.addEventListener('mousedown',getUpperElements,true);
+
+/*
+	ここまで
+*/
+
+
+
+/*
+	divをwindowの枠からはみ出さずにドラッグする
+*/
+
+
+var appendDrag=function(element){
+	window.addEventListener('mousemove',function(event){
+		gCX=event.clientX;
+		gCY=event.clientY;
+	},true);
+	var down=false;
+	var mousex,mousey;
+	element.onmousedown=function(event){
+		mousex=event.clientX;
+		mousey=event.clientY;
+
+		divx=element.offsetLeft;
+		divy=element.offsetTop;
+		var newLeft;
+		var newTop;
+		if(down==false){
+			var hoge=setInterval(function(){
+				//mouseupか、はみだしの時強制にup。それ以外は、マウスに連れて移動
+				if(down==false){
+					clearInterval(hoge);
+				}else{
+						//はみだし監視
+					//x軸方向
+					newLeft=divx+gCX-mousex;
+					newTop=divy+gCY-mousey;
+					if((newLeft+element.offsetWidth)>window.innerWidth){
+						newLeft=window.innerWidth-element.offsetWidth;
+						//down=false;
+						//clearInterval(hoge);
+					}else if(newLeft<0){
+						newLeft=0;
+						//down=false;
+						//clearInterval(hoge);
+					};
+					//y軸方向
+					if((newTop+element.offsetHeight)>window.innerHeight){
+						newTop=window.innerHeight-element.offsetHeight;
+						//down=false;
+						//clearInterval(hoge);
+					}else if(newTop<0){
+						newTop=0;
+						//down=false;
+						//clearInterval(hoge);
+					};
+					//再配置
+					element.style.left=newLeft.toString()+'px';
+					element.style.top=newTop.toString()+'px';
+				};
+			},10);
+		};
+		down=true;
+	};
+//	element.onmouseup=function(){
+//		down=false;
+//	};
+	document.addEventListener('mouseup',function(event){//windowのそとでボタンを離してもここで捕捉//重複してイベントを設定できるようにonmouseupではなくて、addEventListenerを用いた。falseをわざわざ指定しているのはIEの古いものに対応するため?(attachEventではなかったか？)
+		down=false;
+	},false);
+
+};
+
+/*
+	ここまで
+*/
+
+
+
+
+window.addEventListener('mousemove',function(event){
+	window.status="mouse(x:"+event.clientX.toString()+" y:"+event.clientY.toString()+")";
+},true);
+
+
+
+
+
+
+
+onload=function(){
+
+	var bod=document.getElementsByTagName('body')[0];
+	bod.style.overflow='hidden';
+
+	var eleDiv=makeDiv(100,100);
+
+//	eleDiv.style.backgroundColor='red';
+	bod.appendChild(eleDiv);
+
+	var ele=new Array();
+	for(var ii=0;ii<5;ii++){
+		ele.push(makeCanvas(ii));
+		eleDiv.appendChild(ele[ele.length-1]);
+		eleDiv.appendChild(document.createElement('br'));
+	};
+
+
+	appendDrag(eleDiv);
+
+
+};
+
+
+
+
+
+</script></head><body><div style='position:absolute;z-index:10;'><p style='z-index:100;'>adflkajdhflaksjdhfalksjdhfalks</p></div></body></html>

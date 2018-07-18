@@ -1,0 +1,101 @@
+<!DOCTYPE html><html><head>
+<script type='text/javascript'>FileRelative=function(fnBeUsed,fnUser){	this.bu=fnBeUsed;	this.u=fnUser;};FR=new Array();</script>
+<script type='text/javascript' src='../../library/angleOppositeToXAxis.js'></script>
+<script type='text/javascript' src='./library.js'></script>
+<script type='text/javascript' src='./buttonStatic.js'></script>
+<script type='text/javascript' src='./classModalWindow.js'></script>
+<script type='text/javascript' src='./modalWindowInput3prototype.js'></script>
+<script type='text/javascript' src='./modalWindowYesNo2.js'></script>
+<script type='text/javascript' src='./plate3prototype.js'></script>
+
+<script type='text/javascript'>
+
+createContextHTM=null;
+//必要なファイル
+FR.push(new FileRelative('buttonStaticJS','createContextHTML'));
+FR.push(new FileRelative('classModalWindowJS','createContextHTML'));
+FR.push(new FileRelative('modalWindowInput3JS','createContextHTML'));
+FR.push(new FileRelative('modalWindowYesNo2JS','createContextHTML'));
+FR.push(new FileRelative('plate3JS','createContextHTML'));
+FR.push(new FileRelative('libraryJS','createContextHTML'));
+
+
+
+
+
+//onload内にscriptを加えないでください
+onload=function(){
+
+	//ロードチェッカー
+	var flag,count=0;
+	var hoge = setInterval(function(){
+		flag=true;
+		for(var ii=0,len=FR.length;ii<len;ii++){
+			flag = flag && (FR[ii].bu in window);
+			if(!flag)break;
+		};
+		if(flag){
+			clearInterval(hoge);
+			start();
+		}else if(++count>30){//3秒
+			clearInterval(hoge);
+			console.error(FR[ii].u,"で使用する外部ファイル",FR[ii].bu,"が読み込まれていません");
+		};
+	},100);
+};//onload
+
+
+
+//スクリプト開始
+var start = function(){
+
+
+	//右クリックメニューを消す
+	window.addEventListener('contextmenu',function(e){
+//		e.stopPropagation();//つぎの引数がtrueだからcapturePhaseで一番最初に伝播をキャンセルするのはまずい
+		e.preventDefault();
+	},true);
+
+//	var modalWindowCreatePlate=new CreateModalWindow('イベント名を入力してください',Plate);
+//	var modalWindowCreatePlate=new CreateModalWindow('イベント名を入力してください',Plate);
+
+	//function(text,parentElement,func,colorBackground,colorBackgroundTag,colorText){
+
+	var eleButtonCreate = createButton(
+		'CREATE',
+		'black',
+		'pink',
+		'blue'
+	);
+	eleButtonCreate.addEventListener('click',function(){
+		if(gAnsModalWindowInput!=null){
+			gAnsModalWindowInput=null;
+			mwInput('イベント名を入力してください');
+
+			var hoge = setInterval(function(){
+				if(gAnsModalWindowInput!=null && gAnsModalWindowInput!=''){
+					clearInterval(hoge);
+					//ここでPlateをつくる
+					new Plate(gAnsModalWindowInput);
+				};
+			},100);
+		};
+	});
+	document.getElementsByTagName('body')[0].appendChild(eleButtonCreate);
+
+	new Plate("1");//この書き方はメモリリークの原因になるのでは
+	new Plate("2");
+	new Plate("3");
+};
+
+
+</script>
+<style type='text/css'>
+button:hover{
+
+}
+</style>
+</head><body style="font-size:25px;background-color:black;">
+modal windowのクラス化<br>
+消す場合に、消すNODEだけがctxBの上にくるようにする
+<div id="DivTop"></div></body></html>

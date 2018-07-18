@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script type="text/javascript" src="./interval1.js"></script>
+<script type="text/javascript" src="./interval2.js"></script>
+<script type="text/javascript">
+
+onload = function(){
+	//to do
+};
+
+</script>
+</head>
+<body style="overflow:hidden;">
+<div id="DivTop" style="font-size:35px;font-family:'Meiryo UI';">
+①setTimeoutは一回限りの実行。clearTimeoutは緊急停止時のみ使われる。<br>
+②setIntervalもsetTimeoutもひとつ前に定義されたそれらの実行が終わるまで、待つ！！<br>
+つまり、指定時間を過ぎても、前のスレッドが終わっていなければ実行されない。<br>
+<br>
+ということは、いくつsetIntervalを使っても、それらは、逐次計算で行われるということである。<br>
+同期をとる必要がある場合は、変数等で他のスレッドの終了状況を確かめる必要があるということである。<br>
+<br>
+
+
+</div>
+</body>
+</html>

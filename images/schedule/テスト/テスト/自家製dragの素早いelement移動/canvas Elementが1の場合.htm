@@ -1,0 +1,56 @@
+<!DOCTYPE html><html><head>
+<script type='text/javascript'>
+
+window.addEventListener('mousemove',function(event){
+	gMX=event.clientX;
+	gMY=event.clientY;
+	event.stopPropagation();
+},true);
+
+
+onload=function(){
+
+	var bod=document.getElementsByTagName('body')[0];
+	var ele=document.createElement('canvas');
+	var ctx=ele.getContext('2d');
+	ele.width=200;
+	ele.height=50;
+	ele.style.position='absolute';
+
+	ctx.font = "bold 30px '‚l‚r –¾’©'";
+	ctx.fillStyle='green';
+	ctx.fillText('‚±‚ñ‚É‚¿‚í',0,30);
+
+	bod.appendChild(ele);
+
+	var down=false;
+	var mousex,mousey;
+	ele.onmousedown=function(event){
+		mousex=event.clientX;
+		mousey=event.clientY;
+
+		canx=ele.offsetLeft;
+		cany=ele.offsetTop;
+console.log("left=",ele.style.left);
+		if(down==false){
+			var hoge=setInterval(function(){
+				if(down==false)clearInterval(hoge);
+				ele.style.left=(canx+gMX-mousex).toString()+'px';
+				ele.style.top=(cany+gMY-mousey).toString()+'px';
+console.log(canx,gMY,mousex);
+			},10);
+		};
+		down=true;
+console.log("down=",down);
+	};
+	ele.onmouseup=function(){
+		down=false;
+console.log("down=",down);
+	};
+
+};
+
+
+
+
+</script></head><body><div></div></body></html>

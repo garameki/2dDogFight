@@ -1,0 +1,76 @@
+
+
+//Fri Jan 12 2018 17:36:22 GMT+0900 (東京 (標準時))
+
+Headers +='headerAI5_2();\n';//こいつをaction.htmでeval()
+
+
+var headerAI5_2 = function(){
+
+	const filename="headAI5_2.js";
+	const folda = '../Brain/AI/Ver5/';
+
+	var names=new Array();
+
+	//部品ファイル
+
+	names.push('aiWeight5_2.js');//●Weight30
+
+//○	names.push('aiWeight5_0.js');
+
+	//●ここから
+	names.push('jsAngleDecide5_1.js');
+	names.push('jsAngleLearn5_1.js');
+	names.push('jsInputClear5_1.js');
+	names.push('jsInputStore5_1.js');
+	names.push('jsShootDecide5_1.js');
+	names.push('jsShootLearn5_1.js');
+	names.push('jsSpeedDecide5_1.js')
+	names.push('jsSpeedLearn5_1.js')
+	names.push('ai5_1.js');
+	//●
+//○	names.push('aboutAngle5_0.js');
+//○	names.push('aboutInput5_0.js');
+//○	names.push('aboutShoot5_0.js');
+//○	names.push('aboutSpeed5_0.js')
+//○	names.push('ai5_0.js');
+	
+	//headerのidを取得
+	var headId=document.getElementsByTagName("head")[0];
+
+	var tag;
+	for(var ii=0;ii<names.length;ii++){
+		tag = document.createElement("script");
+		tag.setAttribute("type","text/javascript");
+		tag.setAttribute("src",folda+names[ii]);
+		tag.setAttribute("charset","Shift_JIS");
+		headId.appendChild(tag);
+	};
+	var count=0;
+	var hoge = setInterval(function(){
+
+		if(count++>20 || flagStop){
+			clearInterval(hoge);
+			console.log(filename+"     AI5_1が未定義です");
+			flagStop=true;
+		};
+		if('AI5_1' in window){
+			AI5_1.prototype.clearInput = AIClearInput5_1;
+			AI5_1.prototype.storeInfo = AIStoreInfo5_1;
+			AI5_1.prototype.decideAngle = AIDecideAngle5_1;
+			AI5_1.prototype.learnAngle = AILearnAngle5_1;
+			AI5_1.prototype.decideSpeed = AIDecideSpeed5_1;
+			AI5_1.prototype.learnSpeed = AILearnSpeed5_1;
+			AI5_1.prototype.decideShoot = AIDecideShoot5_1;
+			AI5_1.prototype.learnShoot = AILearnShoot5_1;
+			clearInterval(hoge);
+			console.info("headerAI5_2 の準備が出来ました。 !");
+			console.info("'AI5_1'が生成されました。");
+
+		};
+
+	},100);
+
+};
+
+

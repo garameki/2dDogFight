@@ -1,0 +1,55 @@
+<!DOCTYPE html><html><head>
+<script type='text/javascript'>
+
+var func = function(arg){
+
+	console.log("func");	
+	console.log("arg=",arg);
+	console.log("arguments=",arguments);
+
+};
+
+
+var subfunc = function(){
+	func.call(this,arguments);//←この呼び出し①
+
+};
+
+
+onload = function(){
+
+	console.log("new subfunc");
+	var a = new subfunc(1,2);
+
+
+
+
+	console.log("new func");
+	var b = new func(3,4);//←この呼び出し②
+
+};
+
+
+
+
+
+
+
+
+</script></head><body><div><p style='font-size:25px;font-family:"江戸勘定流,魚石行書";'>
+headerの中に、新しいクラスsubfuncを定義したい<br>
+subfunc は func のサブクラスにする<br>
+subfuncの定義の際、引数を親クラスに合わせてコーディングしたくない。<br>
+そこで、.call(this,arguments)として、まとめて渡すことにした。<br>
+しかし、funcのインスタンスを作りたい場合は、困る<br>
+<br>
+<br>
+func の呼び出しかたが異なるのが問題だ。<br>
+
+</p></div></body></html>
+
+
+
+
+
+

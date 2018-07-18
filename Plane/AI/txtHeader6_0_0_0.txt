@@ -1,0 +1,98 @@
+
+
+//Fri Jan 12 2018 17:36:24 GMT+0900 (東京 (標準時))
+
+Headers +='headerPlaneAI6_0_0_0();\n';//こいつをaction.htmでeval()
+
+var headerPlaneAI6_0_0_0 = function(){
+
+	const folda = '../Plane/AI/parts/';
+
+
+	var fnames=new Array();
+
+	//PlaneAIの部品
+	fnames.push('procMotion6_0');
+	fnames.push('procEvaluateAngle6_0');
+	fnames.push('procEvaluateCollision6_0');
+	fnames.push('procEvaluateSpeed6_0');
+	fnames.push('procEvaluateShoot6_0');
+//○	fnames.push('procPrintStatus__versionStatus__');//●
+	fnames.push('classPlaneConstructor6_0');//●
+	
+	//headerのidを取得
+	var headId=document.getElementsByTagName("head")[0];
+	var tagNew;
+	for(var ii=0;ii<fnames.length;ii++){
+		tagNew = document.createElement("script");
+		tagNew.setAttribute("type","text/javascript");
+		tagNew.setAttribute("src",folda+fnames[ii]+'.js');
+		tagNew.setAttribute("charset","Shift_JIS");
+		headId.appendChild(tagNew);
+	};
+
+	//ここでplaneの機能拡張 proc*はPlaneAIの中でプロシージャとして使われます。
+	var counter=0;
+	var hoge = setInterval(function(){
+
+
+
+
+		var conMotion = 'Motion6_0' in window;
+		var conAngle = 'EvaluateAngle6_0' in window;
+		var conCollision = 'EvaluateCollision6_0' in window;
+		var conSpeed = 'EvaluateSpeed6_0' in window;
+		var conShoot = 'EvaluateShoot6_0' in window;
+//○		var conStatus = 'PrintStatus__versionStatus__' in window;
+		var conPlaneConstructor = 'PlaneConstructor6_0' in window;
+
+	var con = conMotion && conAngle && conCollision && conSpeed && conShoot && conPlaneConstructor;
+//○	var con = conMotion && conAngle && conCollision && conSpeed && conShoot && conStatus && conPlaneConstructor;
+		if(con){
+			//新しいサブクラスを作成
+			PlaneAI6_0_0_0 = function(){
+				//引数を変数へ代入
+				var len = arguments.length;
+				for(var ii=0;ii<len;ii++){
+					eval('arg'+ii.toString()+"=arguments["+ii.toString()+"]");
+				};
+				//for(var ii=0;ii<len;ii++)eval("console.log(arg"+ii.toString()+");");
+				//callの準備
+				var args="";
+				for(var ii=0;ii<len;ii++){
+					args+='arg'+ii.toString();
+					if(ii+1!=len)args+=',';
+				};
+				eval("PlaneConstructor6_0.call(this,"+args+");");			
+			};
+			inherits(PlaneAI6_0_0_0,PlaneConstructor6_0);
+
+			PlaneAI6_0_0_0.prototype.namePlane = 'PlaneAI6_0_0_0';
+			PlaneAI6_0_0_0.prototype.procMotion=Motion6_0;//各ファイルの中の関数名を使います
+			PlaneAI6_0_0_0.prototype.procCollision=EvaluateCollision6_0;
+			PlaneAI6_0_0_0.prototype.procAngle=EvaluateAngle6_0;
+			PlaneAI6_0_0_0.prototype.procSpeed=EvaluateSpeed6_0;
+			PlaneAI6_0_0_0.prototype.procShoot=EvaluateShoot6_0;
+//○			PlaneAI6_0_0_0.prototype.procPrintStatus=PrintStatus__versionStatus__;
+
+			console.info("'PlaneAI6_0_0_0'が使えます！");
+			//console.info("headerPlaneAI6_0_0_0 の準備が出来ました。 !");
+			clearInterval(hoge);
+		};
+
+		if(++counter>20 || flagStop){
+			clearInterval(hoge);
+			flagStop=true;
+			if(!conMotion)	console.error("headPlaneAI6_0_0_0.js     'Motion6_0'が定義されていません");
+			if(!conAngle)	console.error("headPlaneAI6_0_0_0.js     'Angle6_0'が定義されていません");
+			if(!conCollision)	console.error("headPlaneAI6_0_0_0.js     'Collision6_0'が定義されていません");
+			if(!conSpeed)	console.error("headPlaneAI6_0_0_0.js     'Speed6_0'が定義されていません");
+			if(!conShoot)	console.error("headPlaneAI6_0_0_0.js     'Shoot6_0'が定義されていません");
+//○			if(!conStatus)	console.error("headPlaneAI6_0_0_0.js     'PrintStatus__versionStatus__'が定義されていません");
+			if(!conPlaneConstructor)console.error("headPlaneAI6_0_0_0.js     'PlaneConstructor6_0'が定義されていません");
+		};
+	},100);
+
+};
+
+

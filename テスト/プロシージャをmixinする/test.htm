@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type='text/javascript' charset='Shift_JIS'>
+
+var AI = function(bb,cc){
+
+	this.plane=bb;
+	this.target=cc;
+
+	this.input=new Array(2);
+};
+
+var Plane = function(name,nameTarget,procAI){
+
+	this.name = name;
+	this.target= nameTarget;
+	this.procAI = procAI;
+};
+Plane.prototype.play = function(){
+
+console.error("proc=",this.procAI);
+	var ai = new this.procAI(this.name,this.target);
+console.error("instance = ",ai);
+
+};
+
+var main=function(){
+
+	var aa = new Plane('fighter','enemy',AI);
+	aa.play();
+};
+
+
+onload=function(){
+
+	main();
+
+};
+
+</script>
+</head>
+<body>
+</body>
+</html>

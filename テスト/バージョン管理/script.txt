@@ -1,0 +1,36 @@
+
+
+var names=new Array();
+
+names.push('./tasu.js');
+names.push('./hiku.js');
+names.push('./dentaku.js');
+	
+//header‚Ìid‚ðŽæ“¾
+var headId=document.getElementsByTagName("head")[0];
+
+var tagNew;
+for(var ii=0;ii<names.length;ii++){
+	tagNew = document.createElement("script");
+	tagNew.setAttribute("type","text/javascript");
+	tagNew.setAttribute("src",names[ii]);
+	tagNew.setAttribute("charset","Shift_JIS");
+	headId.appendChild(tagNew);
+};
+
+
+var count=0;
+var hoge = setInterval(function(){
+
+	if(count++>20){
+		clearInterval(hoge);
+		console.error("head.js  'Dentaku'‚ª–¢’è‹`‚Å‚·");
+	};
+	if('Dentaku' in window){
+		Dentaku.prototype.decideShoot = tasu;
+		Dentaku.prototype.learnShoot = hiku;
+		clearInterval(hoge);
+	};
+},100);
+
+

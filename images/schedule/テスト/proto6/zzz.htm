@@ -1,0 +1,58 @@
+<!DOCTYPE html><html><head>
+<script type='text/javascript'>FileRelative=function(fnBeUsed,fnUser){	this.bu=fnBeUsed;	this.u=fnUser;};FR=new Array();</script>
+<script type='text/javascript'>onload=function(){	var flag,count=0;var hoge = setInterval(function(){flag=true;for(var ii=0,len=FR.length;ii<len;ii++){flag = flag && (FR[ii].bu in window);if(!flag)break;};if(flag){	clearInterval(hoge);start();}else if(++count>30){clearInterval(hoge);console.error(FR[ii].u,"で使用する外部ファイル",FR[ii].bu,"が読み込まれていません");}},100);};</script>
+<script type='text/javascript' src='./library.js'></script>
+<script type='text/javascript' src='./globalEvents2.js'></script>
+<script type='text/javascript' src='./menu.js'></script>
+<script type='text/javascript' src='./plate.js'></script>
+<script type='text/javascript' src='./treeMake.js'></script>
+<script type='text/javascript' src='./treeDrag.js'></script>
+<script type='text/javascript' src='./makeElement3.js'></script>
+<script type='text/javascript' src='./key.js'></script>
+<script type='text/javascript' src='./classModalWindow3.js'></script>
+<script type='text/javascript' src='./modalWindowInput3.js'></script>
+<script type='text/javascript' src='./storage3.js'></script>
+<script type='text/javascript' src='./cookie3.js'></script>
+<script type='text/javascript' src='./metaElement1.js'></script>
+
+
+
+<script type='text/javascript'>
+mainHTM=null;
+FR.push(new FileRelative('storageJS','mainHTM'));
+FR.push(new FileRelative('menuJS','mainHTM'));//createMenu()
+FR.push(new FileRelative('cookieJS','mainHTM'));//cookieDocompress()
+
+
+$testevent=false;
+
+start=function(){
+
+
+
+
+
+	//global variables
+	gBody = document.getElementsByTagName('Body')[0];
+	gBody.style.margin='0px'
+
+
+	//#1
+	Menu.create();//●Menu.elementRootが生成され、DOMにくっついたり離れたりします。//ClassKeyをクッキーから追加するのでDOMにアタッチしておいて
+	//#2
+	Cookie.constructTrees();//storage(cookie)からDOM(or element trees)を生成
+
+
+};
+//右クリックメニューを消す
+window.addEventListener('contextmenu',function(event){
+//	event.stopPropagation();//第三引数がtrueだからcapturePhaseで一番最初に伝播をキャンセルするのはまずい
+	event.preventDefault();
+},true);
+
+
+
+
+</script></head><body></body></html>
+
+

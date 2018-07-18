@@ -1,0 +1,52 @@
+<!DOCTYPE html><html><head>
+<script type='text/javascript'>
+
+onload=function(){
+
+
+	var insE = new Sprite();
+	var insA = new Sprita();
+
+	var time;
+	var ans;
+	ans=0;
+	time=Date.now();
+	for(var ii=0;ii<10000000;ii++){
+		ans = insA.add(ans);
+	};
+	console.log(Date.now()-time);
+
+	ans=0;
+	time=Date.now();
+	for(var ii=0;ii<10000000;ii++){
+		ans = insE.add(ans);
+	};
+	console.log(Date.now()-time);
+};
+
+var inherits = function(childCtor, parentCtor) {
+  /** @constructor */
+  function tempCtor() {};
+  tempCtor.prototype = parentCtor.prototype;
+  childCtor.superClass_ = parentCtor.prototype;
+  childCtor.prototype = new tempCtor();
+  /** @override */
+  childCtor.prototype.constructor = childCtor;
+};
+
+var Sprite = function(){
+	//
+};
+Sprite.prototype.add = function(num){
+	return num+1;
+};
+
+var Sprita = function(){
+	Sprite.call(this);
+};
+inherits(Sprita,Sprite);
+
+
+
+</script>
+</head><body><div></div></body></html>

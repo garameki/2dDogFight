@@ -1,0 +1,70 @@
+違うマイナーバージョン同士を同時に使いたい場合には
+AIVer3 = functionと
+AIVer3_1 =functionをつくり、
+
+オブジェクトの関数も
+AIVer3.prototype.....と
+AIVer3_1.prototype......をあらたに***全て***作る
+
+しかし、双方のprototypeには全く同じ内容をもつ関数が存在する...
+
+
+
+...........
+
+
+これでは開発効率が悪い。
+
+そう考えると、
+
+クラス名.prototype.関数名=関数 をファイルからインポートして使うやり方はやめて、
+
+プロシージャをファイルからインポートして、
+ヘダー内で
+クラス名.prototype.プロパティ=プロシージャ名とした方がパーツの流用可能性が良い
+
+fighter = new PlaneAIVer3_1(...... , AIVer3_1);
+enemy = new PlaneAIVer3(...... , AIVer3);
+
+
+
+
+
+いままで
+ai.storeInfo();
+とできたのは、
+AIVer3.prototype.storeInfo = function(){
+がファイルからインポートされていたから
+
+これを新たな方法で
+ai.storeInfo();とやるには
+
+
+
+//ヘダー
+AIVer3_1.prototype.funcStoreInput = storeInfoVer0;
+
+//本体
+AIVer3_1 = function (){
+
+
+	var layerInput[...........];
+
+
+
+
+
+	var kkk=this;
+	return {
+		storeInfo:kkk.funcStoreInput(layerInput);←パーツのInputVer0が動く
+	};
+};
+
+
+
+
+
+
+AIVer3_1.prototype.プロパティ=関数名(プロシージャ)
+
+

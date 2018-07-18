@@ -1,0 +1,35 @@
+<!DOCTYPE html><html><head>
+<script type='text/javascript'>
+
+//headerのパスを変えてテストしてください
+
+Headers = "";//必須
+flagStop=false;//必須
+$test=true;
+if(!('inherits' in window)){
+	console.log("inheritsがincludeされていません。作成します。");
+	//●継承用
+	inherits = function(childCtor, parentCtor) {
+	  /** @constructor */
+	  function tempCtor() {};
+	  tempCtor.prototype = parentCtor.prototype;
+	  childCtor.superClass_ = parentCtor.prototype;
+	  childCtor.prototype = new tempCtor();
+	  /** @override */
+	  childCtor.prototype.constructor = childCtor;
+	};
+};
+
+onload=function(){
+
+	eval(Headers);//ヘダーの実行
+
+};
+
+
+
+</script>
+
+<script type='text/javascript' src='./headAI6_0_0_0.js'></script>
+
+</head><body><div><p id='test'>ほげ</p></div></body></html>

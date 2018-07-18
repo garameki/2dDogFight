@@ -1,0 +1,70 @@
+var stage3 = function(main,aa,myb,ene1,bea1,ene2,bea2,ene3,bea3,hor){
+	
+	var musicTitle='battle';
+
+	main.stopAudio('dearDragon');
+	if(aa.state==1){
+		ene1.play();
+		bea1.play();
+		ene2.play();
+		bea2.play();
+		ene3.play();
+		bea3.play();
+	}else if(aa.state==-1){
+
+		main.playAudio(musicTitle,0);
+
+		aa.play();
+		myb.play();
+		ene1.play();
+		bea1.play();
+		ene2.play();
+		bea2.play();
+		ene3.play();
+		bea3.play();
+		hor.play();
+	}else{
+		console.error("main   not aa.state==1 nor aa.state==-1");
+		stopSprites(main);
+	};
+	var flagOut=false;
+	var hogeWait1=setInterval(function(){
+	var hogePlaying2 = setInterval(function(){
+		if(!aa.motion){
+			main.stopAudio(musicTitle);
+			flagOut=true;//Ç±ÇÃÉãÅ[ÉvÇåJÇËï‘Ç≥Ç»Ç¢ÇΩÇﬂ
+		//ppp	var hogeWait2 = setInterval(function(){
+console.info("GAME OVER");
+				main.state=-1;
+				myb.stopPlay();
+				ene1.stopPlay();
+				bea1.stopPlay();
+				ene2.stopPlay();
+				bea2.stopPlay();
+				ene3.stopPlay();
+				bea3.stopPlay();
+				hor.stopPlay();
+		//ppp		clearInterval(hogeWait2);
+		//ppp	},3000);
+		}else if(!ene1.motion && !ene2.motion && !ene3.motion){
+			flagOut=true;
+			var hogeWait2 = setInterval(function(){
+console.info("CLEARED STAGE 3");
+				main.stageNumber++;
+				bea1.stopPlay();
+				bea2.stopPlay();
+				bea3.stopPlay();
+
+				main.playing=0;
+				main.state=0;
+				clearInterval(hogeWait2);
+			},2000);
+		};
+		if(flagOut||flagStop){
+			clearInterval(hogePlaying2);
+			console.log("stage3 Stopped");
+		};
+	},200);
+	clearInterval(hogeWait1);
+	},500);		
+};

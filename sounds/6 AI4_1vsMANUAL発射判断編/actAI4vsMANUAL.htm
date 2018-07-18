@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script type="text/javascript" src="../globalVariables.js"></script>
+<script type="text/javascript" src="../../library/angleOppositeToXAxis.js"></script>
+<script type="text/javascript" src="../../library/XYAfterRotation.js"></script>
+<script type="text/javascript" src="../eventListners.js"></script>
+<script type="text/javascript" src="../Sprite.js"></script>
+
+
+<script type="text/javascript" src="../AI/Ver4/headAI4_0.js"></script>
+<script type="text/javascript" src="../Plane/AI/headPlane4_1.js"></script>
+<script type="text/javascript" src="../Plane/MANUAL/headVer0.js"></script>
+<script type="text/javascript" src="../Beam/ssBeamAuto_0.js"></script>
+<script type="text/javascript" src="../Beam/ssBeamAI0_0.js"></script>
+<script type="text/javascript" src="../ssHorizon.js"></script>
+<script type="text/javascript" src="../ssScene.js"></script>
+<script type="text/javascript" src="../ssArrow.js"></script>
+
+
+<script type="text/javascript" src="./stageAI4vsMANUAL.js"></script>
+<script type="text/javascript" src="./castingAI4vsMANUAL.js"></script>
+
+<script type="text/javascript">
+<!--
+
+
+
+//グローバル変数
+onload = function () {
+
+	globalVariables();
+
+	info.text('onload');
+
+
+	//上で読んだheader.jsの中のヘダーをここで実行してください。
+	headerAI4_0();
+	headerPlaneAI4_1();
+	headerPlaneMANUALVer0();
+
+	initializeEventListner();
+	LayerScenery();
+	var hogeInit = setInterval(function(){//強制2秒ヘダー読み込み待ち
+		clearInterval(hogeInit);
+		ai4_readWeight();
+//		ai4_writeWeight();//aiGlovalVariables4_0.jsのreadWeight()をコメントアウトするとai3weight.txtが初期化されます。ここはいじらないでください。
+		initialize();
+	},2000);
+};
+-->
+</script>
+</head>
+<body style="overflow:hidden;">
+<div id="DivTop">
+
+yanbeam stopped !<br>
+と<br>
+yanbeam stopped to play<br>
+の両方が表示される！どこでひょうじしているのかわからない！！<br>
+
+
+
+
+
+</div>
+</body>
+</html>

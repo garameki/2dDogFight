@@ -1,0 +1,29 @@
+<!DOCTYPE html><html><head>
+<script type='text/javascript'>
+
+var Closure = function(){
+
+	var flag=true;
+
+	return {
+		chstate:function(){
+
+			flag=false;
+		},
+		state:flag,//←ここは、コンパイル時の値に固定されてしまう。つまり、state:true,なのである。
+		state2:function(){
+			return flag;
+		}
+	};
+};
+
+onload = function(){
+
+	var a = new Closure;
+	console.log(a.state);
+	a.chstate();
+	console.log(a.state);//変化していない
+	console.log(a.state2());//実際には変化している
+};
+
+</script></head><body><div></div></body></html>

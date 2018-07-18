@@ -1,0 +1,41 @@
+<!DOCTYPE html><html><head>
+<script type='text/javascript'>
+
+var func = function(str){
+
+	return function(){
+		console.log(str);
+	};
+};
+
+var func2 = function(str){
+	console.log(str);
+};
+
+var func3 = function(){
+	console.log("stop");
+};
+
+onload=function(){
+
+	window.addEventListener('mousedown',func('hello'));//<-イベントリスナー化する際にfunc('hello')の実行結果をしまう。()が付いているから->return 以下が返される
+	window.addEventListener('mouseup',func2('bye'));//<-イベントリスナー化する際にfunc('bye')の実行結果をしまう->戻り値がないので何もしない
+
+	window.addEventListener('mousemove',function(){//<-毎回実行してくれる
+		console.log("move");
+	});
+	window.addEventListener('mousedblclick',func3);//<-イベントリスナー化する際にfunc3そのものをしまう->しまった関数を実行してくれる
+
+	//結論
+	//イベントリスナーに引数のある関数を渡したいときはクロージャの形をとって「関数」を返すようにする
+	//イベントリスナーに引数のない関数を渡すときには関数そのものを使う
+
+	//クロージャのreturn functionに引数を持たせることはできない（のかも）。
+};
+
+
+
+
+
+</script>
+</head><body><div></div></body></html>

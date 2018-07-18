@@ -1,0 +1,63 @@
+<!DOCTYPE html><html><head>
+<script type='text/javascript' src="../../library.js"></script>
+<script type='text/javascript'>
+
+
+var SPC=function(name){
+
+window.status=this.num+'   '+name;
+
+	var ele=document.createElement('p');
+	ele.textContent='親クラスで設定されたイベントも実行できることが確認された。(この文字列をクリックしてください)';
+	BODY.appendChild(ele);
+	var myself=this;
+
+	//superクラス内でのイベントの定義
+	ele.onclick=function(event){
+		myself.vanish();
+		event.stopPropagation();	
+	};
+	this.ele=ele;
+};
+SPC.prototype.vanish=function(event){
+
+	this.ele.parentNode.removeChild(this.ele);
+
+};
+SPC.prototype.appear=function(event){
+
+	BODY.appendChild(this.ele);
+
+};
+var SBC=function(name){
+
+	this.num='1';
+	SPC.call(this,name);
+
+
+};
+inherits(SBC,SPC);
+
+
+onload=function(){
+
+
+	var node=new SBC('aaaa');
+
+	window.onclick=function(event){
+
+		node.appear();		
+
+	};
+
+
+
+};
+
+
+
+
+
+
+
+</script></head><body id='BODY'><div></div></body></html>

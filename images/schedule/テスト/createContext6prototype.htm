@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html><head>
+<script type='text/javascript'>FileRelative=function(fnBeUsed,fnUser){	this.bu=fnBeUsed;	this.u=fnUser;};FR=new Array();</script>
+<script type='text/javascript' src='../../library/angleOppositeToXAxis.js'></script>
+<script type='text/javascript' src='./library.js'></script>
+<script type='text/javascript' src='./buttonStatic.js'></script>
+<script type='text/javascript' src='./buttonCreate2prototype.js'></script>
+<script type='text/javascript' src='./menu3prototype.js'></script>
+
+<script type='text/javascript' src='./classModalWindow.js'></script>
+<script type='text/javascript' src='./modalWindowInput3.js'></script>
+<script type='text/javascript' src='./modalWindowYesNo2.js'></script>
+<script type='text/javascript' src='./ita2prototype.js'></script>
+<script type='text/javascript' src='./key2prototype.js'></script>
+<script type='text/javascript' src='./plate5prototype.js'></script>
+
+<script type='text/javascript'>
+/*
+	クラスKeyをPlateに置き換える
+*/
+
+
+createContext6HTM=null;
+//必要なファイル
+FR.push(new FileRelative('menu3JS','createContext6HTML'));//menu();
+FR.push(new FileRelative('libraryJS','createContext6HTML'));//Counter();
+
+
+
+$testevent=true;
+
+
+
+//onload内にscriptを加えないでください
+//ロードチェッカー3秒間
+onload=function(){
+	var flag,count=0;var hoge = setInterval(function(){flag=true;for(var ii=0,len=FR.length;ii<len;ii++){flag = flag && (FR[ii].bu in window);if(!flag)break;};if(flag){	clearInterval(hoge);start();}else if(++count>30){clearInterval(hoge);console.error(FR[ii].u,"で使用する外部ファイル",FR[ii].bu,"が読み込まれていません");}},100);
+};//onload
+
+
+
+//スクリプト開始
+var start = function(){
+
+	document.getElementsByTagName('body')[0].style.margin=0;
+
+
+	//グローバル変数の定義
+
+	NumZindex=new Counter(3);//クラス関数
+	Body=document.getElementsByTagName('body')[0];
+
+
+	eleMenu=menu();
+
+	eleWork=document.createElement('div');
+	eleWork.setAttribute('style','background-color:red;position:absolute;left:0px;top:0px;');
+	Body.appendChild(eleWork);
+
+	eleSens=document.createElement('canvas');
+
+	
+
+	//ここは何のためにあるのでしょうか->クリックした位置にMenuを表示するためです
+//ダメ	Body.addEventListener('DOMNodeInsertedIntoDocument',function(event){
+	Body.addEventListener('DOMNodeInserted',function(event){
+		if(event.target==eleMenu){
+			eleMenu.style.left=(gMouseUpX-eleMenu.offsetWidth/2).toString()+'px';
+			eleMenu.style.top=(gMouseUpY-eleMenu.offsetHeight/2).toString()+'px';
+		};
+	});
+
+	//右クリックメニューを消す
+	window.addEventListener('contextmenu',function(event){
+//		event.stopPropagation();//第三引数がtrueだからcapturePhaseで一番最初に伝播をキャンセルするのはまずい
+		event.preventDefault();
+	},true);
+
+
+	//mousedown,mouseup時のマウスポインタの位置 CAPTURE PHASE
+	window.addEventListener('mousedown',function(event){
+		gMouseDownX=event.clientX;
+		gMouseDownY=event.clientY;
+		gMouseDownXrel=event.offsetX;
+		gMouseDownYrel=event.offsetY;
+		if($testevent)console.log("window.mousedown capture");
+	},true);
+	window.addEventListener('mouseup',function(event){
+		gMouseUpX=event.clientX;
+		gMouseUpY=event.clientY;
+		if($testevent)console.log("window.mouseup capture");
+	},true);
+
+ 
+	//windowをクリックしたときにmenuを貼り付けるbubblePHASE
+	window.addEventListener('click',function(event){
+		if($testevent)console.log("window.click bubble");
+		if(gExistMenu){
+			eleMenu.parentNode.removeChild(eleMenu);
+			gExistMenu=false;
+			if($testevent)console.log("eleMenu削除");
+		}else{
+			gExistMenu=true;
+			eleMenu.style.zIndex=NumZindex();
+			Body.appendChild(eleMenu);
+			if($testevent)console.log("eleMenu追加");
+		};
+	},false);
+
+	//status-bar にマウスの位置を表示
+	window.addEventListener('mousemove',function(event){
+		window.status='マウスの位置 X:'+event.clientX.toString()+' Y:'+event.clientY.toString();
+	},true);
+	window.addEventListener('drag',function(event){
+		window.status='マウスの位置 X:'+event.clientX.toString()+' Y:'+event.clientY.toString();
+	},true);
+
+//eleButtonCreate.style=''になっているのでDOM Explorerでチェックしてください。
+};
+
+
+</script>
+</head>
+<body style="font-size:25px;background-color:black;">
+</body></html>
